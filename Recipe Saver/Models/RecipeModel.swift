@@ -7,7 +7,9 @@
 
 import Foundation
 
-enum Category: String {
+enum Category: String, CaseIterable, Identifiable {
+    var id: String {self.rawValue}
+    
     case breakfast = "Breakfast"
     case soup = "Soup"
     case salade = "Salad"
@@ -62,6 +64,16 @@ extension Recipe {
         category: "Side",
         datePublished: "Jul 9th, 2023",
         url: "Made by BENGINGI https://www.bengingi.com/recipes/pampushky-(ukrainian-garlic-buns)"
+        ),
+    Recipe(
+        name: "Apricot Cherry Salad",
+        image:"https://www.bengingi.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdd27yihoo%2Fimage%2Fupload%2Fv1686596036%2Fs5tsgkajjnpd1cwi7tiz.webp&w=828&q=75",
+        description: "When BBQing in the summer with loved ones, amidst the chatter about the meat everyone plans to grill, let's take a moment to appreciate the fantastic salad you'll be serving. It's a salad with a twist—I discovered it from Zikki.",
+        ingredients: "For the salad: \n10 cherries \n3 apricots \n1 head of romaine \n1 avocado \nA of pistachios \n½ bunch of mint \nYogurt stone/ricotta salata \nFor the dressing: \n3 tbsp extra virgin olive oil \n2 tbsp red wine vinegar \n1 tbsp mustard \nSalt \nBlack pepper",
+        direction: "Start by roasting pistachios in a pan over medium heat for 5 min, mixing constantly. Set aside. \nMake the dressing by adding all the ingredients to a jar, close the lid and shake until thick (add olive oil to thicken, vinegar to dilute). \nCut the romaine lettuce by hands into big pieces and toss with the dressing in a bowl. \nCut open the avocado and cut into rough chunks. \nPit the cherries and the apricots and cut in half. \nSeparate the mint from its stems. \nPlate the salad- add the dressed romaine and decorate with the apricots, cherries, avocado, pistachios and grate some yogurt stone/ ricotta on top. YASSS!",
+        category: "Salad",
+        datePublished: "Jul 9th, 2023",
+        url: "Made by BENGINGI https://www.bengingi.com/recipes/apricot-cherry-salad)"
         )
     ]
 }
