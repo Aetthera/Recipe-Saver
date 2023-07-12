@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddRecipeView: View {
+    @EnvironmentObject var recipesVM: RecipesViewModel
     @State private var name: String = ""
     @State private var selectedCategory: Category = Category.main
     @State private var description: String = ""
@@ -55,17 +56,16 @@ struct AddRecipeView: View {
                 
                 ToolbarItem {
                     NavigationLink(isActive: $navigateToRecipe) {
-                        RecipeView(recipe: Recipe.all.sorted{$0.datePublished > $1.datePublished}[0])
+                        RecipeView(recipe: recipesVM.recipes.sorted{$0.datePublished > $1.datePublished}[0])
                             .navigationBarBackButtonHidden(true)
                     } label: {
-                        <#code#>
-                    }
-
-                    Button {
-                        navigateToRecipe = true
-                    } label: {
-                        Label("Done", systemImage: "checkmark")
-                            .labelStyle(.iconOnly)
+                        Button {
+                            saveRecipe()
+                            navigateToRecipe = true
+                        } label: {
+                            Label("Done", systemImage: "checkmark")
+                                .labelStyle(.iconOnly)
+                        }
                     }
                     .disabled(name.isEmpty)
                 }
@@ -80,5 +80,20 @@ struct AddRecipeView: View {
 struct AddRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         AddRecipeView()
+            .environmentObject(RecipesViewModel())
+    }
+}
+extension AddRecipeView {
+    private func saveRecipe() {
+        let now = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        
+        let datePublished = dateFormatter.string(from: now)
+        print(datePublished)
+        
+        let recipe = Recipe(name: name, image: "", description: description, ingredients: ingridients, direction: directions, category: selectedCategory.rawValue, datePublished: datePublished, url: "")
+        recipesVM.addRecipe(recipe: recipe)
     }
 }
