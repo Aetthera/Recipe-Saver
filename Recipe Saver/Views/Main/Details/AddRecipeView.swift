@@ -16,7 +16,7 @@ struct AddRecipeView: View {
     @State private var directions: String = ""
     @State private var navigateToRecipe = false
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss 
     
     var body: some View {
         NavigationView{
